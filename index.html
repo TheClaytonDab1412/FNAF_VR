@@ -11,9 +11,7 @@
         <!-- VR controller setup -->
         <a-entity id="rig" position="0 1.6 0" movement-controls>
             <a-camera>
-                <a-cursor></a-cursor>
             </a-camera>
-            <a-entity id="left-hand" hand-controls="left"></a-entity>
             <a-entity id="right-hand" hand-controls="right"></a-entity>
         </a-entity>
 
@@ -32,12 +30,7 @@
         AFRAME.registerComponent('button-listener', {
             init: function () {
                 var el = this.el;
-                var leftHand = document.querySelector('#left-hand');
                 var rightHand = document.querySelector('#right-hand');
-
-                leftHand.addEventListener('abuttondown', function () {
-                    startGame();
-                });
 
                 rightHand.addEventListener('abuttondown', function () {
                     startGame();
