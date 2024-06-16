@@ -1,43 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Menu</title>
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.0/dist/aframe-extras.min.js"></script>
 </head>
+
 <body>
+    <a-assets>
+        <a-asset-item id="building" src="../assets/Building.glb"></a-asset-item>
+    </a-assets>
     <a-scene>
-        <!-- VR controller setup -->
-        <a-entity id="rig" position="0 1.6 0" movement-controls>
-            <a-camera>
+        <a-entity id="rig" position="0 0 0">
+            <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true">
                 <a-cursor></a-cursor>
-            </a-camera>
-            <a-entity id="right-hand" hand-controls="right" raycaster="objects: .clickable" laser-controls="hand: right">
             </a-entity>
         </a-entity>
-
-        <!-- Main menu text -->
-        <a-entity position="0 2 -4">
-            <a-text value="FNAF VR Game" color="white" align="center" width="6"></a-text>
-            <a-entity id="start-button" class="clickable" geometry="primitive: plane; height: 1; width: 3"
-                      material="color: blue; transparent: true; opacity: 0.5"
-                      position="0 -1 -1">
-                <a-text value="Point and Click to Start Game" color="white" align="center"></a-text>
-            </a-entity>
+        <a-entity id="office" position="0 0 0" gltf-model="#building">
         </a-entity>
     </a-scene>
-
     <script>
-        AFRAME.registerComponent('start-game', {
-            init: function () {
-                this.el.addEventListener('click', function () {
-                    window.location.href = "loading.html"; // Redirect to loading screen
-                });
-            }
-        });
-
-        document.querySelector('#start-button').setAttribute('start-game', '');
     </script>
 </body>
+
 </html>
