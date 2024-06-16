@@ -1,0 +1,26 @@
+<!-- index.html - Main Menu -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-entity position="0 1 -4">
+            <a-text value="FNAF VR Game" color="white" align="center" width="6"></a-text>
+            <a-plane color="blue" height="1" width="3" position="0 0 -1" 
+                    onclick="startLoading()" material="transparent: true; opacity: 0.5"></a-plane>
+            <a-text value="Start Game" color="white" align="center" position="0 0 -1.2"></a-text>
+        </a-entity>
+    </a-scene>
+
+    <script>
+        function startLoading() {
+            window.location.href = "loading.html"; // Redirect to loading screen
+        }
+    </script>
+</body>
+</html>
