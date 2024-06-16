@@ -11,38 +11,33 @@
         <!-- VR controller setup -->
         <a-entity id="rig" position="0 1.6 0" movement-controls>
             <a-camera>
+                <a-cursor></a-cursor>
             </a-camera>
-            <a-entity id="right-hand" hand-controls="right"></a-entity>
+            <a-entity id="right-hand" hand-controls="right" raycaster="objects: .clickable" laser-controls="hand: right">
+            </a-entity>
         </a-entity>
 
         <!-- Main menu text -->
         <a-entity position="0 2 -4">
             <a-text value="FNAF VR Game" color="white" align="center" width="6"></a-text>
-            <a-entity id="start-button" geometry="primitive: plane; height: 1; width: 3"
+            <a-entity id="start-button" class="clickable" geometry="primitive: plane; height: 1; width: 3"
                       material="color: blue; transparent: true; opacity: 0.5"
                       position="0 -1 -1">
-                <a-text value="Press A to Start Game" color="white" align="center"></a-text>
+                <a-text value="Point and Click to Start Game" color="white" align="center"></a-text>
             </a-entity>
         </a-entity>
     </a-scene>
 
     <script>
-        AFRAME.registerComponent('button-listener', {
+        AFRAME.registerComponent('start-game', {
             init: function () {
-                var el = this.el;
-                var rightHand = document.querySelector('#right-hand');
-
-                rightHand.addEventListener('abuttondown', function () {
-                    startGame();
-                });
-
-                function startGame() {
+                this.el.addEventListener('click', function () {
                     window.location.href = "loading.html"; // Redirect to loading screen
-                }
+                });
             }
         });
 
-        document.querySelector('#start-button').setAttribute('button-listener', '');
+        document.querySelector('#start-button').setAttribute('start-game', '');
     </script>
 </body>
 </html>
