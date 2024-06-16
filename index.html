@@ -1,4 +1,3 @@
-<!-- index.html - Main Menu -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,18 +8,48 @@
 </head>
 <body>
     <a-scene>
-        <a-entity position="0 1 -4">
+        <!-- VR controller setup -->
+        <a-entity id="rig" position="0 1.6 0" movement-controls>
+            <a-camera>
+                <a-cursor></a-cursor>
+            </a-camera>
+            <a-entity id="left-hand" hand-controls="left"></a-entity>
+            <a-entity id="right-hand" hand-controls="right"></a-entity>
+        </a-entity>
+
+        <!-- Main menu text -->
+        <a-entity position="0 2 -4">
             <a-text value="FNAF VR Game" color="white" align="center" width="6"></a-text>
-            <a-plane color="blue" height="1" width="3" position="0 0 -1" 
-                    onclick="startLoading()" material="transparent: true; opacity: 0.5"></a-plane>
-            <a-text value="Start Game" color="white" align="center" position="0 0 -1.2"></a-text>
+            <a-entity id="start-button" geometry="primitive: plane; height: 1; width: 3"
+                      material="color: blue; transparent: true; opacity: 0.5"
+                      position="0 -1 -1">
+                <a-text value="Press A to Start Game" color="white" align="center"></a-text>
+            </a-entity>
         </a-entity>
     </a-scene>
 
     <script>
-        function startLoading() {
-            window.location.href = "loading.html"; // Redirect to loading screen
-        }
+        AFRAME.registerComponent('button-listener', {
+            init: function () {
+                var el = this.el;
+                var leftHand = document.querySelector('#left-hand');
+                var rightHand = document.querySelector('#right-hand');
+
+                leftHand.addEventListener('abuttondown', function () {
+                    startGame();
+                });
+
+                rightHand.addEventListener('abuttondown', function () {
+                    startGame();
+                });
+
+                function startGame() {
+                    window.location.href = "loading.html"; // Redirect to loading screen
+                }
+            }
+        });
+
+        document.querySelector('#start-button').setAttribute('button-listener', '');
     </script>
 </body>
 </html>
